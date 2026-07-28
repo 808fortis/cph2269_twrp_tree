@@ -1,0 +1,37 @@
+# Physical & Image Partitions
+/boot           emmc    /dev/block/by-name/boot           flags=display="Boot";backup=1;flashimg=1
+/recovery       emmc    /dev/block/by-name/recovery       flags=display="Recovery";backup=1;flashimg=1
+/dtbo           emmc    /dev/block/by-name/dtbo           flags=display="DTBO";backup=1;flashimg=1
+/vbmeta         emmc    /dev/block/by-name/vbmeta         flags=display="VBMeta";backup=1;flashimg=1
+/vbmeta_system  emmc    /dev/block/by-name/vbmeta_system  flags=display="VBMeta System";backup=1;flashimg=1
+/vbmeta_vendor  emmc    /dev/block/by-name/vbmeta_vendor  flags=display="VBMeta Vendor";backup=1;flashimg=1
+/logo           emmc    /dev/block/by-name/logo           flags=display="Logo";backup=1;flashimg=1
+/super          emmc    /dev/block/by-name/super          flags=display="Super";backup=1;flashimg=1
+
+# NVRAM / IMEI / Calibration
+/nvram          emmc    /dev/block/by-name/nvram          flags=display="NVRAM";backup=1
+/nvdata         ext4    /dev/block/by-name/nvdata         flags=display="NVData";backup=1;subpartitionof=/nvram
+/nvcfg          ext4    /dev/block/by-name/nvcfg          flags=display="NVCfg";backup=1;subpartitionof=/nvram
+/protect_f      ext4    /dev/block/by-name/protect1       flags=display="Protect F";backup=1;subpartitionof=/nvram
+/protect_s      ext4    /dev/block/by-name/protect2       flags=display="Protect S";backup=1;subpartitionof=/nvram
+/proinfo        emmc    /dev/block/by-name/proinfo        flags=display="Proinfo";backup=1
+
+# Bootloader / Firmware / Security
+/lk             emmc    /dev/block/by-name/lk             flags=display="Bootloader (LK)";backup=1
+/lk2            emmc    /dev/block/by-name/lk2            flags=display="Bootloader2 (LK2)";backup=1;subpartitionof=/lk
+/tee1           emmc    /dev/block/by-name/tee1           flags=display="TEE";backup=1
+/tee2           emmc    /dev/block/by-name/tee2           flags=display="TEE2";backup=1;subpartitionof=/tee1
+/para           emmc    /dev/block/by-name/para           flags=display="Misc"
+/persistent     emmc    /dev/block/by-name/frp            flags=display="Persistent / FRP";backup=1
+/seccfg         emmc    /dev/block/by-name/seccfg         flags=display="SecCFG"
+/spmfw          emmc    /dev/block/by-name/spmfw          flags=display="SpmFW"
+/md1img         emmc    /dev/block/by-name/md1img         flags=display="Modem / Baseband";backup=1
+
+# Data & Cache
+/metadata       ext4    /dev/block/by-name/md_udc         flags=display="Metadata"
+/cache          ext4    /dev/block/by-name/cache          flags=display="Cache"
+/opporeserve    ext4    /dev/block/by-name/opporeserve2   flags=display="OPPO Reserve"
+
+# External Storage
+/external_sd    auto    /dev/block/mmcblk1p1 /dev/block/mmcblk1  flags=display="MicroSD";storage;wipeingui;removable
+/usb_otg        auto    /dev/block/sda1      /dev/block/sda      flags=display="USB OTG";storage;wipeingui;removable
